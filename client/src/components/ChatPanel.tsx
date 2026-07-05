@@ -18,7 +18,7 @@ import PromptChips from "./PromptChips";
 import AvatarBadge from "./AvatarBadge";
 import TypingIndicator from "./TypingIndicator";
 import { sendMessage } from "../api";
-import { getAccent, INK } from "../theme";
+import { useThemeMode } from "../ThemeModeContext";
 import type { ChatMessage, Persona, ProviderName, ProviderStatusMap } from "../types";
 
 const PROVIDER_LABELS: Record<ProviderName, string> = {
@@ -58,6 +58,7 @@ export default function ChatPanel({
   const [error, setError] = useState<string | null>(null);
   const [showThinking, setShowThinking] = useState(false);
   const scrollRef = useRef<HTMLDivElement | null>(null);
+  const { ink, getAccent } = useThemeMode();
   const color = getAccent(persona.accent);
   const firstName = persona.name.split(" ")[0];
 
@@ -139,7 +140,7 @@ export default function ChatPanel({
               px: { xs: 1.5, md: 3 },
               py: 2,
               borderBottom: "1px solid",
-              borderColor: INK.border,
+              borderColor: ink.border,
               bgcolor: "background.paper",
             }}
           >
@@ -276,7 +277,7 @@ export default function ChatPanel({
         />
       )}
 
-      <Box sx={{ display: "flex", alignItems: "flex-end", gap: 1, px: { xs: 1.5, md: 3 }, py: 2, borderTop: "1px solid", borderColor: INK.border }}>
+      <Box sx={{ display: "flex", alignItems: "flex-end", gap: 1, px: { xs: 1.5, md: 3 }, py: 2, borderTop: "1px solid", borderColor: ink.border }}>
         <TextField
           fullWidth
           multiline
@@ -296,7 +297,7 @@ export default function ChatPanel({
               onClick={() => handleSend()}
               disabled={loading || !input.trim()}
               aria-label="Send message"
-              sx={{ bgcolor: color.main, color: color.contrastText, "&:hover": { bgcolor: color.main }, "&.Mui-disabled": { bgcolor: "rgba(244,237,222,0.08)" } }}
+              sx={{ bgcolor: color.main, color: color.contrastText, "&:hover": { bgcolor: color.main }, "&.Mui-disabled": { bgcolor: ink.disabledOverlay } }}
             >
               <SendRoundedIcon fontSize="small" />
             </IconButton>

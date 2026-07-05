@@ -5,16 +5,21 @@ import Stack from "@mui/material/Stack";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
+import LightModeRoundedIcon from "@mui/icons-material/LightModeRounded";
+import DarkModeRoundedIcon from "@mui/icons-material/DarkModeRounded";
 import Logo from "./Logo";
-import { INK } from "../theme";
+import { useThemeMode } from "../ThemeModeContext";
 
 interface NavBarProps {
   guruCount: number;
   onMenuClick: () => void;
 }
 
-/** Slim global top bar: brand mark, product name, and a live guru count. */
+/** Slim global top bar: brand mark, product name, live guru count, and the dark/light switch. */
 export default function NavBar({ guruCount, onMenuClick }: NavBarProps) {
+  const { mode, toggleMode, ink } = useThemeMode();
+  const isDark = mode === "dark";
+
   return (
     <Box
       component={motion.header}
@@ -28,8 +33,8 @@ export default function NavBar({ guruCount, onMenuClick }: NavBarProps) {
         px: { xs: 1.5, md: 3 },
         py: 1.25,
         borderBottom: "1px solid",
-        borderColor: INK.border,
-        bgcolor: INK.surface,
+        borderColor: ink.border,
+        bgcolor: ink.surface,
       }}
     >
       <Stack direction="row" alignItems="center" spacing={0.75}>
@@ -64,26 +69,44 @@ export default function NavBar({ guruCount, onMenuClick }: NavBarProps) {
         </Stack>
       </Stack>
 
-      <Tooltip title="More gurus are joining the courtyard soon">
-        <Box
-          sx={{
-            fontFamily: '"Space Grotesk", sans-serif',
-            fontSize: { xs: 11, md: 12 },
-            fontWeight: 600,
-            letterSpacing: 0.4,
-            color: "primary.main",
-            border: "1px solid",
-            borderColor: "rgba(242,169,60,0.35)",
-            bgcolor: "rgba(242,169,60,0.08)",
-            borderRadius: 999,
-            px: { xs: 1, md: 1.5 },
-            py: 0.5,
-            whiteSpace: "nowrap",
-          }}
-        >
-          {guruCount} {guruCount === 1 ? "guru" : "gurus"} · MVP
-        </Box>
-      </Tooltip>
+      <Stack direction="row" alignItems="center" spacing={1}>
+        <Tooltip title={isDark ? "Switch to light mode" : "Switch to dark mode"}>
+          <IconButton
+            onClick={toggleMode}
+            aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+            size="small"
+            sx={{
+              color: "text.secondary",
+              border: "1px solid",
+              borderColor: ink.border,
+              "&:hover": { borderColor: ink.borderStrong },
+            }}
+          >
+            {isDark ? <LightModeRoundedIcon fontSize="small" /> : <DarkModeRoundedIcon fontSize="small" />}
+          </IconButton>
+        </Tooltip>
+
+        <Tooltip title="More gurus are joining the courtyard soon">
+          <Box
+            sx={{
+              fontFamily: '"Space Grotesk", sans-serif',
+              fontSize: { xs: 11, md: 12 },
+              fontWeight: 600,
+              letterSpacing: 0.4,
+              color: "primary.main",
+              border: "1px solid",
+              borderColor: "rgba(242,169,60,0.35)",
+              bgcolor: "rgba(242,169,60,0.08)",
+              borderRadius: 999,
+              px: { xs: 1, md: 1.5 },
+              py: 0.5,
+              whiteSpace: "nowrap",
+            }}
+          >
+            {guruCount} {guruCount === 1 ? "guru" : "gurus"} · MVP
+          </Box>
+        </Tooltip>
+      </Stack>
     </Box>
   );
 }

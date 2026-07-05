@@ -7,7 +7,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
-import { getAccent, INK } from "../theme";
+import { useThemeMode } from "../ThemeModeContext";
 import AvatarBadge from "./AvatarBadge";
 import type { Persona } from "../types";
 
@@ -37,6 +37,7 @@ function SidebarContent({
   showCloseButton?: boolean;
   onClose?: () => void;
 }) {
+  const { ink, getAccent } = useThemeMode();
   return (
     <Box sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
       <Box
@@ -97,7 +98,7 @@ function SidebarContent({
                     borderColor: `${accent.main}55`,
                     "&:hover": { bgcolor: accent.soft },
                   },
-                  "&:hover": { bgcolor: "rgba(244,237,222,0.05)" },
+                  "&:hover": { bgcolor: "action.hover" },
                 }}
               >
                 <AvatarBadge
@@ -131,7 +132,7 @@ function SidebarContent({
         })}
       </List>
 
-      <Divider sx={{ borderColor: INK.border }} />
+      <Divider sx={{ borderColor: ink.border }} />
       <Box sx={{ px: 2.5, py: 2 }}>
         <Typography
           variant="caption"
@@ -156,6 +157,7 @@ export default function Sidebar({
   mobileOpen,
   onMobileClose,
 }: SidebarProps) {
+  const { ink } = useThemeMode();
   return (
     <>
       {/* Desktop: always-visible rail */}
@@ -170,7 +172,7 @@ export default function Sidebar({
             boxSizing: "border-box",
             position: "relative",
             borderRight: "1px solid",
-            borderColor: INK.border,
+            borderColor: ink.border,
             bgcolor: "background.paper",
           },
         }}

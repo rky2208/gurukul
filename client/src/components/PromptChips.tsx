@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
-import { getAccent } from "../theme";
+import { useThemeMode } from "../ThemeModeContext";
 
 interface PromptChipsProps {
   suggestions: string[];
@@ -12,6 +12,7 @@ interface PromptChipsProps {
 
 export default function PromptChips({ suggestions, onPick, accent, disabled }: PromptChipsProps) {
   if (!suggestions?.length) return null;
+  const { getAccent } = useThemeMode();
   const color = getAccent(accent);
 
   return (

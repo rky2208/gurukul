@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import Collapse from "@mui/material/Collapse";
 import Button from "@mui/material/Button";
 import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
-import { getAccent } from "../theme";
+import { useThemeMode } from "../ThemeModeContext";
 import AvatarBadge from "./AvatarBadge";
 import type { Role } from "../types";
 
@@ -29,6 +29,7 @@ export default function MessageBubble({
 }: MessageBubbleProps) {
   const [showThinking, setShowThinking] = useState(false);
   const isUser = role === "user";
+  const { getAccent } = useThemeMode();
   const color = getAccent(accent);
 
   return (

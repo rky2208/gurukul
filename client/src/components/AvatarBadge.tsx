@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Box from "@mui/material/Box";
 import type { Accent } from "../theme";
+import { useThemeMode } from "../ThemeModeContext";
 
 interface AvatarBadgeProps {
   emoji: string;
@@ -20,6 +21,7 @@ interface AvatarBadgeProps {
 export default function AvatarBadge({ emoji, imageUrl, accent, size = 40, active }: AvatarBadgeProps) {
   const [imageFailed, setImageFailed] = useState(false);
   const showImage = Boolean(imageUrl) && !imageFailed;
+  const { ink } = useThemeMode();
 
   return (
     <Box
@@ -35,7 +37,7 @@ export default function AvatarBadge({ emoji, imageUrl, accent, size = 40, active
         overflow: "hidden",
         background: `linear-gradient(155deg, ${accent.soft}, transparent 65%)`,
         border: "1.5px solid",
-        borderColor: active ? accent.main : "rgba(244,237,222,0.14)",
+        borderColor: active ? accent.main : ink.borderStrong,
         boxShadow: active ? `0 0 0 3px ${accent.soft}` : "none",
         transition: "box-shadow 0.25s ease, border-color 0.25s ease",
       }}

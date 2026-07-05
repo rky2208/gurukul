@@ -1,11 +1,12 @@
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import { INK } from "../theme";
+import { useThemeMode } from "../ThemeModeContext";
 
 /** Slim footer strip — sets expectations that this is an evolving MVP,
  * and that replies are AI-generated, not the real people. */
 export default function Footer() {
+  const { ink } = useThemeMode();
   return (
     <Box
       component="footer"
@@ -16,8 +17,8 @@ export default function Footer() {
         px: 3,
         py: 0.85,
         borderTop: "1px solid",
-        borderColor: INK.border,
-        bgcolor: INK.surface,
+        borderColor: ink.border,
+        bgcolor: ink.surface,
       }}
     >
       <Stack spacing={0.15} sx={{ textAlign: "center" }}>
@@ -39,4 +40,3 @@ export default function Footer() {
     </Box>
   );
 }
-
