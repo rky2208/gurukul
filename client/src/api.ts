@@ -3,7 +3,7 @@ import type { ChatMessage, ChatResponse, Persona, ProviderName, StatusResponse }
 // In dev this stays "/api" and goes through the Vite proxy in vite.config.ts.
 // In a production build, point VITE_API_URL at the deployed backend's origin
 // (e.g. https://api.gurukul.app) — see client/.env.example.
-const BASE = import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api` : "/api";
+const BASE = import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api` : "api";
 
 const GET_TIMEOUT_MS = 10_000;
 const CHAT_TIMEOUT_MS = 35_000; // a little above the server's own LLM_TIMEOUT_MS
