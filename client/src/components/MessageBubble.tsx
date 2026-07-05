@@ -15,6 +15,7 @@ interface MessageBubbleProps {
   content: string;
   thinking?: string;
   avatarEmoji: string;
+  avatarImage?: string;
   accent?: string;
 }
 
@@ -23,6 +24,7 @@ export default function MessageBubble({
   content,
   thinking,
   avatarEmoji,
+  avatarImage,
   accent,
 }: MessageBubbleProps) {
   const [showThinking, setShowThinking] = useState(false);
@@ -37,7 +39,7 @@ export default function MessageBubble({
       transition={{ duration: 0.32, ease: "easeOut" }}
       sx={{ display: "flex", gap: 1.25, mb: 2, justifyContent: isUser ? "flex-end" : "flex-start" }}
     >
-      {!isUser && <AvatarBadge emoji={avatarEmoji} accent={color} size={32} />}
+      {!isUser && <AvatarBadge emoji={avatarEmoji} imageUrl={avatarImage} accent={color} size={32} />}
       <Box sx={{ maxWidth: "72%", display: "flex", flexDirection: "column", alignItems: isUser ? "flex-end" : "flex-start" }}>
         <Paper
           elevation={0}

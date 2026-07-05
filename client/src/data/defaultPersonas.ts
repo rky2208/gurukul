@@ -16,6 +16,7 @@ const defaultPersonas: Persona[] = [
     name: "Hitesh Choudhary",
     label: "Chai-Powered Code Guru ☕",
     avatarEmoji: "☕",
+    avatarImage: "/avatars/hitesh.jpg",
     accent: "amber",
     suggestions: [
       "Sir, backend seekhna hai, kaha se start karu?",
@@ -29,6 +30,7 @@ const defaultPersonas: Persona[] = [
     name: "Piyush Garg",
     label: "Ships Fast, Explains Faster 🚀",
     avatarEmoji: "🚀",
+    avatarImage: "/avatars/piyush.jpg",
     accent: "teal",
     suggestions: [
       "How do I get out of tutorial hell?",

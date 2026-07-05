@@ -1,20 +1,26 @@
+import { useState } from "react";
 import Box from "@mui/material/Box";
 import type { Accent } from "../theme";
 
 interface AvatarBadgeProps {
   emoji: string;
+  imageUrl?: string;
   accent: Accent;
   size?: number;
   active?: boolean;
 }
 
 /**
- * A persona's avatar: their symbol set inside a soft gradient-ringed
- * badge in their own accent. Deliberately not a photo of the real person —
- * the symbol (☕ / 🚀) plus color is each guru's signature, the way a
- * seal or monogram would be.
+ * A persona's avatar. If `imageUrl` is provided (and loads successfully),
+ * shows that photo inside the gradient-ringed badge. Otherwise (or if the
+ * image 404s/fails to load) falls back to the emoji symbol + color, so a
+ * missing/broken image file never breaks the UI.
+ *
  */
-export default function AvatarBadge({ emoji, accent, size = 40, active }: AvatarBadgeProps) {
+export default function AvatarBadge({ emoji, imageUrl, accent, size = 40, active }: AvatarBadgeProps) {
+  const [imageFailed, setImageFailed] = useState(false);
+  const showImage = Boolean(imageUrl) && !imageFailed;
+
   return (
     <Box
       sx={{
@@ -26,6 +32,7 @@ export default function AvatarBadge({ emoji, accent, size = 40, active }: Avatar
         justifyContent: "center",
         fontSize: size * 0.46,
         flexShrink: 0,
+        overflow: "hidden",
         background: `linear-gradient(155deg, ${accent.soft}, transparent 65%)`,
         border: "1.5px solid",
         borderColor: active ? accent.main : "rgba(244,237,222,0.14)",
@@ -33,7 +40,17 @@ export default function AvatarBadge({ emoji, accent, size = 40, active }: Avatar
         transition: "box-shadow 0.25s ease, border-color 0.25s ease",
       }}
     >
-      {emoji}
+      {showImage ? (
+        <Box
+          component="img"
+          src={imageUrl}
+          alt=""
+          onError={() => setImageFailed(true)}
+          sx={{ width: "100%", height: "100%", objectFit: "cover" }}
+        />
+      ) : (
+        emoji
+      )}
     </Box>
   );
 }

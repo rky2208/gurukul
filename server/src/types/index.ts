@@ -13,6 +13,7 @@ export interface Persona {
   name: string;
   label: string;
   avatarEmoji: string;
+  avatarImage?: string;
   accent: string;
   suggestions: string[];
   /** Full system prompt text — server-side only, never sent to the client. */

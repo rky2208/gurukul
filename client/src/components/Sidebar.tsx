@@ -102,6 +102,7 @@ function SidebarContent({
               >
                 <AvatarBadge
                   emoji={p.avatarEmoji}
+                  imageUrl={p.avatarImage}
                   accent={accent}
                   size={40}
                   active={active}

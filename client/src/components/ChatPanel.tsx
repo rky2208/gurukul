@@ -143,7 +143,7 @@ export default function ChatPanel({
               bgcolor: "background.paper",
             }}
           >
-            <AvatarBadge emoji={persona.avatarEmoji} accent={color} size={44} />
+            <AvatarBadge emoji={persona.avatarEmoji} imageUrl={persona.avatarImage} accent={color} size={44} />
             <Box sx={{ flex: 1, minWidth: 0 }}>
               <Typography variant="h6" sx={{ lineHeight: 1.2 }}>
                 {persona.name}
@@ -206,7 +206,7 @@ export default function ChatPanel({
             sx={{ maxWidth: 640, mx: "auto", mt: { xs: 4, md: 7 }, textAlign: "center" }}
           >
             <Box sx={{ display: "flex", justifyContent: "center" }}>
-              <AvatarBadge emoji={persona.avatarEmoji} accent={color} size={64} />
+              <AvatarBadge emoji={persona.avatarEmoji} imageUrl={persona.avatarImage} accent={color} size={64} />
             </Box>
             <Box>
               <Typography
@@ -238,6 +238,7 @@ export default function ChatPanel({
             content={m.content}
             thinking={m.thinking}
             avatarEmoji={persona.avatarEmoji}
+            avatarImage={persona.avatarImage}
             accent={persona.accent}
           />
         ))}
@@ -249,7 +250,7 @@ export default function ChatPanel({
             animate={{ opacity: 1 }}
             sx={{ display: "flex", alignItems: "center", gap: 1.25, mb: 2 }}
           >
-            <AvatarBadge emoji={persona.avatarEmoji} accent={color} size={32} />
+            <AvatarBadge emoji={persona.avatarEmoji} imageUrl={persona.avatarImage} accent={color} size={32} />
             <Paper
               elevation={0}
               sx={{ borderRadius: 3, borderTopLeftRadius: 4, border: "1px solid", borderColor: "divider", bgcolor: "background.paper" }}
