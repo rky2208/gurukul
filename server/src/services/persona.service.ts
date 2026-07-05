@@ -15,7 +15,7 @@ const personas: Record<string, Persona> = {
     name: "Hitesh Choudhary",
     label: "Chai-Powered Code Guru ☕",
     avatarEmoji: "☕",
-    avatarImage: "/avatars/hitesh.jpg",
+    avatarImage: "https://chaicode.com/assets/white-3-CGLYt1t0.webp",
     accent: "amber",
     suggestions: [
       "Sir, backend seekhna hai, kaha se start karu?",
@@ -31,7 +31,7 @@ const personas: Record<string, Persona> = {
     name: "Piyush Garg",
     label: "Ships Fast, Explains Faster 🚀",
     avatarEmoji: "🚀",
-    avatarImage: "/avatars/piyush.jpg",
+    avatarImage: "https://www.piyushgarg.dev/_next/image?url=%2Fimages%2Fpiyush-garg.png&w=256&q=75",
     accent: "teal",
     suggestions: [
       "How do I get out of tutorial hell?",
