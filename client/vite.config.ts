@@ -1,8 +1,17 @@
+import { fileURLToPath, URL } from "node:url";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
+  resolve: {
+    alias: {
+      // Mirrors the "@/*" path in tsconfig.json — lets any file do
+      // `import { Foo } from "@/components/..."` instead of a long chain
+      // of "../../../".
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
+    },
+  },
   server: {
     port: 5173,
     proxy: {

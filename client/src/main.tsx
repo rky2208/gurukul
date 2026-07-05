@@ -2,9 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import CssBaseline from "@mui/material/CssBaseline";
 import App from "./App";
-import ErrorBoundary from "./components/ErrorBoundary";
-import { ThemeModeProvider } from "./ThemeModeContext.tsx";
-import "./index.css";
+import { ErrorBoundary } from "./components/common";
+import { ThemeModeProvider } from "./context/ThemeModeContext";
+import "./assets/styles/global.css";
 
 const container = document.getElementById("root");
 if (!container) {
