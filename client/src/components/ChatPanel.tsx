@@ -27,6 +27,13 @@ const PROVIDER_LABELS: Record<ProviderName, string> = {
   gemini: "Gemini",
 };
 
+// Model picker and "show thinking" are dev/debug controls, not meant for
+// end users in production. They're on automatically in `npm run dev`
+// (import.meta.env.DEV is set by Vite), and off in a production build
+// unless explicitly forced on via VITE_SHOW_DEV_CONTROLS=true (handy for a
+// staging deploy where you still want them visible).
+const SHOW_DEV_CONTROLS = import.meta.env.DEV || import.meta.env.VITE_SHOW_DEV_CONTROLS === "true";
+
 interface ChatPanelProps {
   persona: Persona;
   messages: ChatMessage[];
@@ -146,7 +153,7 @@ export default function ChatPanel({
               </Typography>
             </Box>
 
-            {availableProviders.length > 0 && (
+            {SHOW_DEV_CONTROLS && availableProviders.length > 0 && (
               <Tooltip title="Choose which model answers as this guru">
                 <Select
                   size="small"
@@ -164,18 +171,20 @@ export default function ChatPanel({
               </Tooltip>
             )}
 
-            <Tooltip title="Reveal the guru's private reasoning alongside each reply">
-              <FormControlLabel
-                control={
-                  <Switch
-                    size="small"
-                    checked={showThinking}
-                    onChange={(e) => setShowThinking(e.target.checked)}
-                  />
-                }
-                label={<Typography variant="caption">show thinking</Typography>}
-              />
-            </Tooltip>
+            {SHOW_DEV_CONTROLS && (
+              <Tooltip title="Reveal the guru's private reasoning alongside each reply">
+                <FormControlLabel
+                  control={
+                    <Switch
+                      size="small"
+                      checked={showThinking}
+                      onChange={(e) => setShowThinking(e.target.checked)}
+                    />
+                  }
+                  label={<Typography variant="caption">show thinking</Typography>}
+                />
+              </Tooltip>
+            )}
           </Paper>
         </Box>
       </AnimatePresence>
